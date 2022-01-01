@@ -4,19 +4,23 @@ var timeRemaining = document.getElementById("quizTimer");
 /* set variable for score */ 
 var currentScore = document.getElementById("quizScore");
 
-var countdownTimer = 15
+var countdownTimer = 10
 
-/* click starts the quiz and quiz timer */ 
-document.getElementById("start-button").addEventListener("click", timer)
 /* timer function */
+function onClick() {
+    timeRemaining.textContent = "Time remaining: " + countdownTimer;
     var timer = setInterval(function () {
-            timeRemaining.textContent = "Time remaining: " + countdownTimer;
-            countdownTimer --;
-            if(countdownTimer === 0) {
-                clearInterval(timer);
-                timeRemaining.textContent = ""
+        countdownTimer --;
+        timeRemaining.textContent = "Time remaining: " + countdownTimer;
+        if(countdownTimer === 0) {
+            clearInterval(timer);
+            timeRemaining.textContent = "";
         }
     }, 1000);
+}
+
+/* click starts the quiz and quiz timer */ 
+document.getElementById("start-button").addEventListener("click", onClick)
 
 
 /* first question posts */ 
