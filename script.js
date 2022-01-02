@@ -4,11 +4,16 @@ var timeRemaining = document.getElementById("quizTimer");
 /* set variable for score */ 
 var currentScore = document.getElementById("quizScore");
 
-var countdownTimer = 10
+var countdownTimer = 10;
+
+var score = 0;
 
 /* timer function */
 function onClick() {
     timeRemaining.textContent = "Time remaining: " + countdownTimer;
+    currentScore.textContent = "Score: " + score;
+    var startButton = document.getElementById("start-button");
+    startButton.setAttribute("style", "display:none")
     var timer = setInterval(function () {
         countdownTimer --;
         timeRemaining.textContent = "Time remaining: " + countdownTimer;
@@ -20,40 +25,40 @@ function onClick() {
 }
 
 /* click starts the quiz and quiz timer */ 
-document.getElementById("start-button").addEventListener("click", onClick)
+document.getElementById("start-button").addEventListener("click", onClick);
 
 
 /* first question posts */ 
 
-/* correct answer  and points and continues */ 
+/* correct answer verify, add points and continues */ 
 /* incorrect answer deducts time and continues */ 
 
 
 /*second question posts */ 
 
-/* correct answer  and points and continues */ 
+/* correct answer verify, add points and continues */ 
 /*incorrect answer deducts time and continues */ 
 
 
 /*third question posts */ 
 
-/* correct answer  and points and continues */ 
+/* correct answer verify, add points and continues */ 
 /*incorrect answer deducts time and continues */ 
 
 
 /*fourth question posts */ 
 
-/* correct answer  and points and continues */
+/* correct answer verify, add points and continues */
 /*incorrect answer deducts time and continues */
 
 
 /*fifth question posts */
 
-/* correct answer  and points and continues */
+/* correct answer ,verify add points and continues */
 /*incorrect answer deducts time and continues */
 
 
-/* timer goes off alert */
+/* timer goes off confirm */
 
 /* configure score combo of time left and correct answers */
 
