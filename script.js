@@ -3,13 +3,13 @@ var timeRemaining = document.getElementById("quizTimer");
 /* set variable for score */ 
 var quizScore = document.getElementById("quizScore");
 var quizQuestion = document.getElementById("quizQuestion");
-var optionA = document.getElementById("answerA");
+var answerA = document.getElementById("answerA");
 
-var optionB = document.getElementById("answerB");
+var answerB = document.getElementById("answerB");
 
-var optionC = document.getElementById("answerC");
+var answerC = document.getElementById("answerC");
 
-var optionD = document.getElementById("answerD");
+var answerD = document.getElementById("answerD");
 
 var countdownTimer = 10;
 
@@ -57,7 +57,11 @@ function loadQuestions() {
     if(question === questionAnswerArray.length) {
         return;
     } else {
-        quizQuestion.textContent = questionAnswerArray[question];
+        quizQuestion.textContent = questionAnswerArray[question][0];
+        answerA.textContent = questionAnswerArray[question][1];
+        answerB.textContent = questionAnswerArray[question][2];
+        answerC.textContent = questionAnswerArray[question][3];
+        answerD.textContent = questionAnswerArray[question][4];
     }
     
 }
