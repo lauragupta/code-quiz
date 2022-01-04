@@ -14,14 +14,17 @@ var optionD = document.getElementById("answerD");
 var countdownTimer = 10;
 
 var score = 0;
+var question = 0;
 
-/*Create an Array of Questions*/
-var questionArray = [
-    "What part of the html document does the title go?",
-    "What is the shorthand order of directions for a margin in CSS?",
-    "What symbols are used around comments in html?",
-    "Which of the following heading is the biggest by default?"
-]
+// hide answer buttons until used
+
+/*Create an Array of arrays of Questions and answers*/
+var questionAnswerArray = [
+    ["What part of the html document does the title go?", "body", "head", "heading", "footer"], 
+    ["What is the shorthand order of directions for a margin in CSS?", "Left, Right, Top, Bottom", "Top, Bottom, Left, Right", "Top, Right, Bottom, Left", "Right, Left, Top, Bottom"],
+    ["What symbols are used around comments in html?", "//Comment Here", "<!--Comment Here-->", "/*Comment Here*/", "#Comment Here"],
+    ["Which of the following heading is the biggest by default?","<h1>", "<h3>", "<h4>", "<h6>"]
+];
 
 
 /* timer function */
@@ -51,44 +54,23 @@ document.getElementById("start-button").addEventListener("click", onClick);
 
 /* Post first question*/ 
 function loadQuestions() {
-    var question = 0;
-    if(question === questionArray.length) {
+    if(question === questionAnswerArray.length) {
         return;
     } else {
-        quizQuestion.textContent = questionArray[question];
+        quizQuestion.textContent = questionAnswerArray[question];
     }
     
 }
 
 /*next question function*/
-
+function nextQuestion() {
+    question++;
+}
 
 /* correct answer verify, add points and continues */ 
 /* incorrect answer deducts time and continues */ 
 
 
-/*second question posts */ 
-
-/* correct answer verify, add points and continues */ 
-/*incorrect answer deducts time and continues */ 
-
-
-/*third question posts */ 
-
-/* correct answer verify, add points and continues */ 
-/*incorrect answer deducts time and continues */ 
-
-
-/*fourth question posts */ 
-
-/* correct answer verify, add points and continues */
-/*incorrect answer deducts time and continues */
-
-
-/*fifth question posts */
-
-/* correct answer ,verify add points and continues */
-/*incorrect answer deducts time and continues */
 
 
 /* timer goes off confirm */
