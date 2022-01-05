@@ -1,5 +1,5 @@
 /* set variable for timer */ 
-var timeRemaining = document.getElementById("quizTimer");
+var quizTimer = document.getElementById("quizTimer");
 /* set variable for score */ 
 var quizScore = document.getElementById("quizScore");
 var quizQuestion = document.getElementById("quizQuestion");
@@ -26,21 +26,24 @@ var questionAnswerArray = [
     ["Which of the following heading is the biggest by default?","<h1>", "<h3>", "<h4>", "<h6>", "answerA"]
 ];
 
+
+
 /* timer function */
 function onClick() {
-    timeRemaining.textContent = "Time remaining: " + countdownTimer;
+    quizTimer.textContent = "Time remaining: " + countdownTimer;
     quizScore.textContent = "Score: " + score;
     loadQuestions();
     var startButton = document.getElementById("start-button");
     startButton.setAttribute("style", "display:none");
     var timer = setInterval(function () {
         countdownTimer --;
-        timeRemaining.textContent = "Time remaining: " + countdownTimer;
+        quizTimer.textContent = "Time remaining: " + countdownTimer;
         if(countdownTimer === 0) {
             clearInterval(timer);
-            timeRemaining.textContent = "";
+            quizTimer.textContent = "";
         }
     }, 1000);
+
 }
 
 /* click starts the quiz and quiz timer */ 
@@ -76,6 +79,11 @@ answerButtons.addEventListener("click", checkAnswer);
 /* Post first question*/ 
 function loadQuestions() {
     if(question === questionAnswerArray.length) {
+        score = score + countdownTimer;
+        quizScore.textContent = "Score: " + score;
+        quizTimer.textContent = "";
+        quizQuestion.textContent = "";
+        answerButtons.textContent = "";
         return;
     } else {
         quizQuestion.textContent = questionAnswerArray[question][0];
@@ -89,7 +97,7 @@ function loadQuestions() {
 }
 
 
-/* timer goes off confirm */
+/* timer goes off confirm ?? */
 
 /* configure score combo of time left and correct answers */
 
