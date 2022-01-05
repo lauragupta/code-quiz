@@ -3,6 +3,7 @@ var timeRemaining = document.getElementById("quizTimer");
 /* set variable for score */ 
 var quizScore = document.getElementById("quizScore");
 var quizQuestion = document.getElementById("quizQuestion");
+var answerButtons = document.getElementById("answerButtons");
 var answerA = document.getElementById("answerA");
 
 var answerB = document.getElementById("answerB");
@@ -10,22 +11,20 @@ var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
 
 var answerD = document.getElementById("answerD");
-
-var countdownTimer = 10;
+var feedback = document.getElementById("feedback");
+var countdownTimer = 40;
 
 var score = 0;
 var question = 0;
-
 // hide answer buttons until used
 
 /*Create an Array of arrays of Questions and answers*/
 var questionAnswerArray = [
-    ["What part of the html document does the title go?", "body", "head", "heading", "footer"], 
-    ["What is the shorthand order of directions for a margin in CSS?", "Left, Right, Top, Bottom", "Top, Bottom, Left, Right", "Top, Right, Bottom, Left", "Right, Left, Top, Bottom"],
-    ["What symbols are used around comments in html?", "//Comment Here", "<!--Comment Here-->", "/*Comment Here*/", "#Comment Here"],
-    ["Which of the following heading is the biggest by default?","<h1>", "<h3>", "<h4>", "<h6>"]
+    ["What part of the html document does the title go?", "body", "head", "heading", "footer", "answerB"], 
+    ["What is the shorthand order of directions for a margin in CSS?", "Left, Right, Top, Bottom", "Top, Bottom, Left, Right", "Top, Right, Bottom, Left", "Right, Left, Top, Bottom", "answerC"],
+    ["What symbols are used around comments in html?", "//Comment Here", "<!--Comment Here-->", "/*Comment Here*/", "#Comment Here", "answerB"],
+    ["Which of the following heading is the biggest by default?","<h1>", "<h3>", "<h4>", "<h6>", "answerA"]
 ];
-
 
 /* timer function */
 function onClick() {
@@ -48,9 +47,23 @@ function onClick() {
 document.getElementById("start-button").addEventListener("click", onClick);
 
 
+function checkAnswer(event) {
+    var correctAnswer = questionAnswerArray[question][5];
+    if(event.target.id === correctAnswer) {
+        feedback.textContent = "Correct!";
+        score = score + 5;
+        quizScore.textContent = "Score: " + score;
+        question++;
+        loadQuestions();
+    } else {
+        feedback.textContent = "Wrong";
+        countdownTimer = countdownTimer - 5;
+        question++;
+        loadQuestions();
+    }
+}
 //add event llistener for answer buttons child of new div
-
-//answerButtons.addEventListener("click", function(nextQuestion))
+answerButtons.addEventListener("click", checkAnswer);
 
 /* Post first question*/ 
 function loadQuestions() {
@@ -62,14 +75,16 @@ function loadQuestions() {
         answerB.textContent = questionAnswerArray[question][2];
         answerC.textContent = questionAnswerArray[question][3];
         answerD.textContent = questionAnswerArray[question][4];
+        
     }
     
 }
 
-/*next question function*/
+
+/*next question function
 function nextQuestion() {
     question++;
-}
+}*/
 
 /* correct answer verify, add points and continues */ 
 /* incorrect answer deducts time and continues */ 
