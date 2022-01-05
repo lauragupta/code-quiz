@@ -46,17 +46,25 @@ function onClick() {
 /* click starts the quiz and quiz timer */ 
 document.getElementById("start-button").addEventListener("click", onClick);
 
+/*Clear feedback */
+function clearFeedback() {
+    feedback.textContent = "";
+}
 
+/* correct answer verify, add points and continues */ 
+/* incorrect answer verified, deducts time and continues */ 
 function checkAnswer(event) {
     var correctAnswer = questionAnswerArray[question][5];
     if(event.target.id === correctAnswer) {
         feedback.textContent = "Correct!";
+        setTimeout(clearFeedback, 2000);
         score = score + 5;
         quizScore.textContent = "Score: " + score;
         question++;
         loadQuestions();
     } else {
         feedback.textContent = "Wrong";
+        setTimeout(clearFeedback, 2000);
         countdownTimer = countdownTimer - 5;
         question++;
         loadQuestions();
@@ -79,17 +87,6 @@ function loadQuestions() {
     }
     
 }
-
-
-/*next question function
-function nextQuestion() {
-    question++;
-}*/
-
-/* correct answer verify, add points and continues */ 
-/* incorrect answer deducts time and continues */ 
-
-
 
 
 /* timer goes off confirm */
