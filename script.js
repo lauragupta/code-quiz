@@ -16,6 +16,7 @@ var countdownTimer = 40;
 
 var score = 0;
 var question = 0;
+var timer
 // hide answer buttons until used
 
 /*Create an Array of arrays of Questions and answers*/
@@ -29,13 +30,13 @@ var questionAnswerArray = [
 
 
 /* timer function */
-function onClick() {
+function onStartButtonClick() {
     quizTimer.textContent = "Time remaining: " + countdownTimer;
     quizScore.textContent = "Score: " + score;
     loadQuestions();
     var startButton = document.getElementById("start-button");
     startButton.setAttribute("style", "display:none");
-    var timer = setInterval(function () {
+    timer = setInterval(function () {
         countdownTimer --;
         quizTimer.textContent = "Time remaining: " + countdownTimer;
         if(countdownTimer === 0) {
@@ -47,7 +48,7 @@ function onClick() {
 }
 
 /* click starts the quiz and quiz timer */ 
-document.getElementById("start-button").addEventListener("click", onClick);
+document.getElementById("start-button").addEventListener("click", onStartButtonClick);
 
 /*Clear feedback */
 function clearFeedback() {
@@ -81,6 +82,7 @@ function loadQuestions() {
     if(question === questionAnswerArray.length) {
         score = score + countdownTimer;
         quizScore.textContent = "Score: " + score;
+        clearInterval(timer);
         quizTimer.textContent = "";
         quizQuestion.textContent = "";
         answerButtons.textContent = "";
