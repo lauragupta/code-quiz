@@ -12,11 +12,17 @@ var answerC = document.getElementById("answerC");
 
 var answerD = document.getElementById("answerD");
 var feedback = document.getElementById("feedback");
+var gameOver = document.getElementById("gameOver");
+var highScores = document.getElementById("highScores");
+var scoreboardDirections = document.getElementById("scoreboardDirections");
+var scoreForm = document.getElementById("scoreForm");
 var countdownTimer = 40;
 
 var score = 0;
 var question = 0;
-var timer
+var timer;
+var event;
+
 // hide answer buttons until used
 
 /*Create an Array of arrays of Questions and answers*/
@@ -41,7 +47,7 @@ function onStartButtonClick() {
         quizTimer.textContent = "Time remaining: " + countdownTimer;
         if(countdownTimer === 0) {
             clearInterval(timer);
-            quizTimer.textContent = "";
+            endTheGame();
         }
     }, 1000);
 
@@ -74,8 +80,59 @@ function checkAnswer(event) {
         loadQuestions();
     }
 }
-//add event llistener for answer buttons child of new div
+//add event listener for answer buttons child of new div
 answerButtons.addEventListener("click", checkAnswer);
+
+
+function getHighscores() {
+    var storedHighscore = JSON.parse(localStorage.getItem("highscore"));
+    if (storedHighscore === null) {
+        return [];
+    }
+    return storedHighscore;
+}
+
+function renderHighscores() {
+    var highscoreList = document.getElementById("highscoreList");
+    var storedHighscores = getHighscores();
+    storedHighscores.forEach(function (gameScore) {
+        highscoreList.textContent += gameScore.initials + "-" + gameScore.score + ";       ";
+    });
+    
+}
+
+function postHighscores(event) {
+    event.preventDefault();
+    var initials = document.getElementById("initials").value;
+    var newHighscore = {
+        initials: initials,
+        score: score,
+    };
+    var storedHighscores = getHighscores();
+    storedHighscores.unshift(newHighscore);
+    localStorage.setItem("highscore", JSON.stringify(storedHighscores));
+    renderHighscores();
+}
+
+
+//add event listener for submit button for form
+scoreForm.addEventListener("submit", postHighscores);
+
+/* offer to add initials with score to save in local storage */
+function scoreboard() {
+    highScores.textContent = "High Scoreboard";
+    scoreboardDirections.textContent = "Enter your initials if you want to save your score.";
+
+}
+
+//End the game
+function endTheGame() {
+    quizTimer.textContent = "";
+        quizQuestion.textContent = "";
+        answerButtons.textContent = "";
+        gameOver.textContent = "Game Over!!!";
+        scoreboard();
+}
 
 /* Post first question*/ 
 function loadQuestions() {
@@ -83,10 +140,7 @@ function loadQuestions() {
         score = score + countdownTimer;
         quizScore.textContent = "Score: " + score;
         clearInterval(timer);
-        quizTimer.textContent = "";
-        quizQuestion.textContent = "";
-        answerButtons.textContent = "";
-        return;
+        endTheGame();
     } else {
         quizQuestion.textContent = questionAnswerArray[question][0];
         answerA.textContent = questionAnswerArray[question][1];
@@ -97,14 +151,5 @@ function loadQuestions() {
     }
     
 }
-
-
-/* timer goes off confirm ?? */
-
-/* configure score combo of time left and correct answers */
-
-/* show score */
-
-/* offer to add initials with score to save in local storage */
 
 /* offer to play again to try to beat your score */
