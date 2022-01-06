@@ -1,22 +1,22 @@
 body {
-    background-color: rgb(215, 252, 252);
+    background-color: rgb(221, 233, 233);
     padding: 10px;
 }
 
 .main-title {
     width: 80%;
     margin: auto;
-    background-color: rgb(133, 133, 236);
-    border: 3px darkgray solid;
+    background-color: rgb(212, 212, 231);
+    border: 1px darkgray solid;
 }
 
 .main-container {
     width: 80%;
-    margin: auto;
-    border: 3px darkgray solid;
+    margin: 5px;
+    border: 1px darkgray solid;
     height: 500px;
 }
 
-button {
-    align: center;
+.answerA {
+    visibility: hidden;
 }
